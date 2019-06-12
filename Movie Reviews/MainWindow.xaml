@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie_Reviews"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        
+        <Grid Margin="10,10,10,274">
+            <ScrollViewer HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="762">
+                <TextBlock x:Name="txtBlock" TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Grid>
+        <Grid Margin="10,300,10,10">
+            <DataGrid x:Name="dataGrid" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="Control.MouseDoubleClick" Handler="Datagrid_DoubleClicked"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

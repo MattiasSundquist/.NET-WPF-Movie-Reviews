@@ -1,8 +1,11 @@
-﻿namespace Movie_Reviews
+﻿using MongoDB.Bson;
+
+namespace Movie_Reviews
 {
     class MovieReview
     {
 
+        public ObjectId Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Review { get; set; }
