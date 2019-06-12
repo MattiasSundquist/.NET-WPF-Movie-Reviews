@@ -20,9 +20,13 @@ namespace Movie_Reviews
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        Database database;
+
         public MainWindow()
         {
             InitializeComponent();
+            database = new Database();
         }
     }
 }
