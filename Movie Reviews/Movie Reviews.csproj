@@ -97,7 +97,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MovieReview.cs" />
+    <Compile Include="Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

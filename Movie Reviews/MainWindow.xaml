@@ -5,21 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie_Reviews"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="Movie Review" 
+        Height="700"
+        Width="800"
+        MinWidth="800"
+        MinHeight="700">
     <Grid>
-        <Grid Margin="10,10,10,274">
-            <ScrollViewer HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="762">
-                <TextBlock x:Name="txtBlock" TextWrapping="Wrap"/>
-            </ScrollViewer>
-        </Grid>
-        <Grid Margin="10,300,10,10">
-            <DataGrid x:Name="dataGrid" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0">
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <EventSetter Event="Control.MouseDoubleClick" Handler="Datagrid_DoubleClicked"/>
-                    </Style>
-                </DataGrid.Resources>
-            </DataGrid>
-        </Grid>
+        <GroupBox Header="1. Search for a movie title:" HorizontalAlignment="Left" Height="94" Margin="10,10,0,0" VerticalAlignment="Top" Width="238">
+            <Grid>
+                <TextBox x:Name="txt_search_movie" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+                <Button x:Name="btn_search_movie" Content="Search" HorizontalAlignment="Left" Margin="71,38,0,0" VerticalAlignment="Top" Width="75" Click="btn_search_movie_Click"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="2. Double-click a movie in the datagrid" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="3. Edit/Add information about the movie" HorizontalAlignment="Left" Height="343" Margin="10,140,0,0" VerticalAlignment="Top" Width="772">
+            <Grid>
+                <Label Content="Title: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_edit_movieTitle" HorizontalAlignment="Left" Height="23" Margin="53,13,0,0" VerticalAlignment="Top" Width="325"/>
+                <Label Content="Year: " HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_edit_movieYear" HorizontalAlignment="Left" Height="23" Margin="53,44,0,0" VerticalAlignment="Top" Width="325"/>
+                <Label Content="Plot: " HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_edit_moviePlot" Height="180" Margin="53,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="325"/>
+                <Label Content="Review: " HorizontalAlignment="Left" Margin="383,10,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_edit_movieReview" HorizontalAlignment="Left" Height="211" Margin="383,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="367"/>
+                <ComboBox x:Name="combo_score" HorizontalAlignment="Left" Margin="53,260,0,0" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Score: " HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btn_add_movieReview" Content="Add Review" HorizontalAlignment="Left" Margin="53,287,0,0" VerticalAlignment="Top" Width="75" Click="btn_add_movieReview_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="API response" HorizontalAlignment="Left" Height="176" Margin="0,483,0,0" VerticalAlignment="Top" Width="392">
+            <Grid>
+                <DataGrid x:Name="dataGridAPI" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="Control.MouseDoubleClick" Handler="DatagridAPI_DoubleClicked"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Database response" HorizontalAlignment="Left" Height="176" Margin="392,483,0,0" VerticalAlignment="Top" Width="392">
+            <Grid>
+                <DataGrid x:Name="dataGridDatabase" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="Control.MouseDoubleClick" Handler="DatagridDatabase_DoubleClicked"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
