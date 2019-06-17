@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.IO;
-using RestSharp;
-using Newtonsoft.Json;
 using System.Windows.Controls;
-using System.Collections;
-using System.Web.UI.WebControls;
+using System;
 
 namespace Movie_Reviews
 {
@@ -19,69 +12,64 @@ namespace Movie_Reviews
     {
 
         private Database database;
-        private Movie movieToAdd;
 
         public MainWindow()
         {
             InitializeComponent();
+            InitializeCustomComponents();
 
             database = new Database();
-
-            string[] comboBoxContent = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-            combo_score.ItemsSource = comboBoxContent;
         }
 
         private void DatagridAPI_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
-            Movie response = ParsingHandler.SearchExactTitle(FromDynamicToString(row.Item))[0];
-            txt_edit_movieTitle.Text = response.Title;
-            txt_edit_movieYear.Text = response.Year;
-            txt_edit_moviePlot.Text = response.Plot;
-            movieToAdd = response;
+            Movie movie = APIHandler.SearchExactTitle(FromDynamicToString(row.Item))[0];
+            CopyContentFromDatabase(movie);
         }
 
         private void DatagridDatabase_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
-            DataGridRow row = sender as DataGridRow;
-            if (row.Item is Movie)
-            {
-                var response = row.Item as Movie;
-                txt_edit_movieTitle.Text = response.Title;
-                txt_edit_movieYear.Text = response.Year;
-                txt_edit_moviePlot.Text = response.Plot;
-                txt_edit_movieReview.Text = response.Review;
-                combo_score.SelectedItem = response.Score;
-                movieToAdd = response;
-            }
+            DataGridRow dgr = sender as DataGridRow;
+            CopyContentFromDatabase(dgr.Item as Movie);
+        }
+
+        private void CopyContentFromDatabase(Movie movie)
+        {
+            txt_edit_movieTitle.Text = movie.Title;
+            txt_edit_movieYear.Text = movie.Year;
+            txt_edit_moviePlot.Text = movie.Plot;
+            txt_edit_movieReview.Text = movie.Review;
+            combo_score.SelectedItem = movie.Score;
         }
 
         private string FromDynamicToString(dynamic jsonObject)
         {
-            if (jsonObject.Title is string)
-            {
-                return (string)jsonObject.Title;
-            } else
-            {
-                return null;
-            }
+            return (string)jsonObject.Title;
         }
 
         private void btn_search_movie_Click(object sender, RoutedEventArgs e)
         {
             string searchQuery = txt_search_movie.Text;
-            dataGridAPI.ItemsSource = ParsingHandler.SearchWithQuery(searchQuery);
-            dataGridDatabase.ItemsSource = database.SearchMovieTitle(searchQuery);
+            if ((string) combo_search_movie.SelectedValue == "Search both")
+            {
+                dataGridAPI.ItemsSource = APIHandler.SearchWithQuery(searchQuery);
+                dataGridDatabase.ItemsSource = database.SearchMovieTitle(searchQuery);
+            } else if ((string)combo_search_movie.SelectedValue == "Search API")
+                dataGridAPI.ItemsSource = APIHandler.SearchWithQuery(searchQuery);
+            else
+                dataGridDatabase.ItemsSource = database.SearchMovieTitle(searchQuery);
         }
 
         private void btn_add_movieReview_Click(object sender, RoutedEventArgs e)
         {
-            
-            movieToAdd.Title = txt_edit_movieTitle.Text;
-            movieToAdd.Year = txt_edit_movieYear.Text;
-            movieToAdd.Plot = txt_edit_moviePlot.Text;
-            movieToAdd.Review = txt_edit_movieReview.Text;
-            movieToAdd.Score = (string) combo_score.SelectedItem;
+            Movie movieToAdd = new Movie(
+                txt_edit_movieTitle.Text,
+                txt_edit_movieYear.Text,
+                txt_edit_moviePlot.Text,
+                txt_edit_movieReview.Text,
+                (string)combo_score.SelectedItem);
+
             database.AddMovieReview(movieToAdd);
             ClearGUI();
         }
@@ -96,91 +84,46 @@ namespace Movie_Reviews
             combo_score.SelectedIndex = -1;
             dataGridAPI.ItemsSource = null;
             dataGridDatabase.ItemsSource = null;
-            movieToAdd = null;
         }
-    }
 
-    class ParsingHandler
-    {
-        public static List<Movie> SearchExactTitle(string title)
+        private void InitializeCustomComponents()
         {
-            string parsed = APIHandler.MakeTitleRequest(title);
-            JsonTextReader reader = new JsonTextReader(new StringReader(parsed));
-            Movie movie = new Movie(title);
-            string previousValue = "";
-            while (reader.Read())
+            string[] comboBoxContent = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+            combo_score.ItemsSource = comboBoxContent;
+
+            comboBoxContent = new string[] { "Search both", "Search API", "Search database" };
+            combo_search_movie.ItemsSource = comboBoxContent;
+            combo_search_movie.SelectedIndex = 0;
+        }
+
+        private void btn_clear_edit_Click(object sender, RoutedEventArgs e)
+        {
+            ClearEditSection();
+        }
+
+        private void ClearEditSection()
+        {
+            txt_edit_movieTitle.Text = "";
+            txt_edit_movieYear.Text = "";
+            txt_edit_moviePlot.Text = "";
+            txt_edit_movieReview.Text = "";
+            combo_score.SelectedIndex = -1;
+        }
+
+        private void CopyToEdit_Clicked(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (btn.Name == "btn_copy_API" && dataGridAPI.SelectedItem != null)
             {
-                if (reader.Value != null)
-                {
-                    if (previousValue == "Year")
-                    {
-                        movie.Year = reader.Value.ToString();
-                    }
-                    if (previousValue == "Plot")
-                    {
-                        movie.Plot = reader.Value.ToString();
-                    }
-                    previousValue = reader.Value.ToString();
-                }
+                dynamic dynObj = dataGridAPI.SelectedItem;
+                Movie movie = APIHandler.SearchExactTitle(dynObj.Title)[0];
+                CopyContentFromDatabase(movie);
             }
-            List<Movie> movies = new List<Movie>{movie};
-            return new List<Movie> { movie };
-        }
-
-        public static IList SearchWithQuery(string query)
-        {
-            string parsed = APIHandler.MakeTitleSearchRequest(query);
-            JsonTextReader reader = new JsonTextReader(new StringReader(parsed));
-            List<Movie> titles = new List<Movie>();
-            string previousValue = "";
-            int indexCounter = 0;
-            while (reader.Read())
+            else if (btn.Name == "btn_copy_database" && dataGridDatabase.SelectedItem != null)
             {
-                if (reader.Value != null)
-                {
-                    if (previousValue == "Title")
-                    {
-                        titles.Insert(indexCounter, new Movie(reader.Value.ToString()));
-                    }
-                    if (previousValue == "Year")
-                    {
-                        titles[indexCounter].Year = reader.Value.ToString();
-                        indexCounter++;
-                    }
-                    previousValue = reader.Value.ToString();
-                }
+                Movie movie = dataGridDatabase.SelectedItem as Movie;
+                CopyContentFromDatabase(movie);
             }
-
-            return titles.Select(x => new { x.Title, x.Year }).ToList();
-        }
-    }
-
-    class APIHandler
-    {
-        private const string URL = "http://www.omdbapi.com/";
-        private const string APIKEY = "&apikey=fedd7355";
-        
-        public static string MakeTitleRequest(string title)
-        {
-            string url = URL + "?t=" + title + APIKEY;
-            var client = new RestClient(url);
-            var response = client.Execute(new RestRequest());
-            return response.Content;
-        }
-
-        public static string MakeTitleSearchRequest(string title)
-        {
-            string url = URL + "?s=" + title + APIKEY;
-            var client = new RestClient(url);
-            var response = client.Execute(new RestRequest());
-            return response.Content;
-        }
-
-        public static string MakeRequestGetResponse(string url)
-        {
-            var client = new RestClient(url);
-            var response = client.Execute(new RestRequest());
-            return response.Content;
         }
     }
 }

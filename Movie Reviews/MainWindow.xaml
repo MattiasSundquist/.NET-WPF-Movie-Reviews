@@ -6,53 +6,67 @@
         xmlns:local="clr-namespace:Movie_Reviews"
         mc:Ignorable="d"
         Title="Movie Review" 
-        Height="700"
-        Width="800"
+        Height="740.678"
+        Width="876.272"
         MinWidth="800"
-        MinHeight="700">
+        MinHeight="700" 
+        FontSize="14" 
+        FontFamily="Segoe UI Semibold" 
+        Foreground="Black" 
+        Background="#FFB0B0B0">
     <Grid>
-        <GroupBox Header="1. Search for a movie title:" HorizontalAlignment="Left" Height="94" Margin="10,10,0,0" VerticalAlignment="Top" Width="238">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="9"/>
+        </Grid.Effect>
+        <GroupBox Header="Actions" HorizontalAlignment="Left" Height="681" Margin="10,10,0,0" VerticalAlignment="Top" Width="417" FontSize="14" BorderBrush="White" Foreground="Black">
             <Grid>
-                <TextBox x:Name="txt_search_movie" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                <Button x:Name="btn_search_movie" Content="Search" HorizontalAlignment="Left" Margin="71,38,0,0" VerticalAlignment="Top" Width="75" Click="btn_search_movie_Click"/>
+                <GroupBox Header="Search for title" HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="305" Margin="0,10,0,0">
+                    <Grid>
+                        <TextBox x:Name="txt_search_movie" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
+                        <Button x:Name="btn_search_movie" Content="Search" HorizontalAlignment="Left" Margin="208,10,0,0" VerticalAlignment="Top" Width="75" Click="btn_search_movie_Click"/>
+                        <ComboBox x:Name="combo_search_movie" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" Width="Auto"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Edit/Add information about the movie" HorizontalAlignment="Left" Height="535" Margin="0,119,0,0" VerticalAlignment="Top" Width="405">
+                    <Grid>
+                        <Label Content="Title: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txt_edit_movieTitle" HorizontalAlignment="Left" Height="23" Margin="60,16,0,0" VerticalAlignment="Top" Width="325"/>
+                        <Label Content="Year: " HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txt_edit_movieYear" HorizontalAlignment="Left" Height="23" Margin="60,44,0,0" VerticalAlignment="Top" Width="325"/>
+                        <Label Content="Plot: " HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txt_edit_moviePlot" Height="120" Margin="10,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="375"/>
+                        <Label Content="Review: " HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txt_edit_movieReview" HorizontalAlignment="Left" Height="211" Margin="10,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375"/>
+                        <ComboBox x:Name="combo_score" HorizontalAlignment="Left" Margin="62,471,0,0" VerticalAlignment="Top" Width="120"/>
+                        <Label Content="Score: " HorizontalAlignment="Left" Margin="10,467,0,0" VerticalAlignment="Top"/>
+                        <Button x:Name="btn_add_movieReview" Content="Add Review" HorizontalAlignment="Left" Margin="187,473,0,0" VerticalAlignment="Top" Width="85" Click="btn_add_movieReview_Click"/>
+                        <Button x:Name="btn_clear_edit" Content="Clear" HorizontalAlignment="Left" Margin="308,473,0,0" VerticalAlignment="Top" Width="75" Click="btn_clear_edit_Click"/>
+                    </Grid>
+                </GroupBox>
             </Grid>
         </GroupBox>
-        <Label Content="2. Double-click a movie in the datagrid" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="3. Edit/Add information about the movie" HorizontalAlignment="Left" Height="343" Margin="10,140,0,0" VerticalAlignment="Top" Width="772">
+        <GroupBox Header="API response" HorizontalAlignment="Left" Height="335" Margin="432,10,0,0" VerticalAlignment="Top" Width="417">
             <Grid>
-                <Label Content="Title: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txt_edit_movieTitle" HorizontalAlignment="Left" Height="23" Margin="53,13,0,0" VerticalAlignment="Top" Width="325"/>
-                <Label Content="Year: " HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txt_edit_movieYear" HorizontalAlignment="Left" Height="23" Margin="53,44,0,0" VerticalAlignment="Top" Width="325"/>
-                <Label Content="Plot: " HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txt_edit_moviePlot" Height="180" Margin="53,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="325"/>
-                <Label Content="Review: " HorizontalAlignment="Left" Margin="383,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txt_edit_movieReview" HorizontalAlignment="Left" Height="211" Margin="383,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="367"/>
-                <ComboBox x:Name="combo_score" HorizontalAlignment="Left" Margin="53,260,0,0" VerticalAlignment="Top" Width="120"/>
-                <Label Content="Score: " HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="btn_add_movieReview" Content="Add Review" HorizontalAlignment="Left" Margin="53,287,0,0" VerticalAlignment="Top" Width="75" Click="btn_add_movieReview_Click"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="API response" HorizontalAlignment="Left" Height="176" Margin="0,483,0,0" VerticalAlignment="Top" Width="392">
-            <Grid>
-                <DataGrid x:Name="dataGridAPI" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0">
+                <DataGrid x:Name="dataGridAPI" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0" Opacity="0.5" Margin="0,0,0,40">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridRow}">
                             <EventSetter Event="Control.MouseDoubleClick" Handler="DatagridAPI_DoubleClicked"/>
                         </Style>
                     </DataGrid.Resources>
                 </DataGrid>
+                <Button x:Name="btn_copy_API" Content="Copy to edit" HorizontalAlignment="Left" Margin="10,276,0,0" VerticalAlignment="Top" Width="Auto" Click="CopyToEdit_Clicked"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Database response" HorizontalAlignment="Left" Height="176" Margin="392,483,0,0" VerticalAlignment="Top" Width="392">
+        <GroupBox Header="Database response" HorizontalAlignment="Left" Height="341" Margin="432,350,0,0" VerticalAlignment="Top" Width="417">
             <Grid>
-                <DataGrid x:Name="dataGridDatabase" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0">
+                <DataGrid x:Name="dataGridDatabase" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0" Opacity="0.5" Margin="0,0,0,40">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridRow}">
                             <EventSetter Event="Control.MouseDoubleClick" Handler="DatagridDatabase_DoubleClicked"/>
                         </Style>
                     </DataGrid.Resources>
                 </DataGrid>
+                <Button x:Name="btn_copy_database" Content="Copy to edit" HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Width="Auto" Click="CopyToEdit_Clicked"/>
             </Grid>
         </GroupBox>
     </Grid>
