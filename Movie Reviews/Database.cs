@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 
 namespace Movie_Reviews
 {
@@ -11,11 +12,25 @@ namespace Movie_Reviews
 
         public Database()
         {
+            //var database = CreateCloudDatabase();
+
             // Connect to mongodb server running on 'localhost:27017' and get/create database 'MovieReviews'
-            IMongoDatabase database = new MongoClient().GetDatabase("MovieReviews");
+            var database = new MongoClient().GetDatabase("MovieReviews");
 
             // Create a collection called "MovieReview"
             colMovieReviews = database.GetCollection<Movie>("MovieReview");
+        }
+
+        private IMongoDatabase CreateCloudDatabase()
+        {
+            string connectionString = @"INSERT YOUR OWN CONNECTION STRING HERE";
+            MongoClientSettings settings = MongoClientSettings.FromUrl(
+              new MongoUrl(connectionString)
+            );
+            settings.SslSettings =
+              new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
+            var database = new MongoClient(settings).GetDatabase("MovieReviews");
+            return database;
         }
 
         /// <summary>

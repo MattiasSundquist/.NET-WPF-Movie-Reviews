@@ -12,12 +12,12 @@
         MinHeight="700" 
         FontSize="14" 
         FontFamily="Segoe UI Semibold" 
-        Foreground="Black" Background="#FFB0B0B0">
+        Foreground="#FF303AFF" Background="#FFCFFBFF">
     <Grid>
         <Grid.Effect>
             <DropShadowEffect BlurRadius="9"/>
         </Grid.Effect>
-        <GroupBox Header="Actions" HorizontalAlignment="Left" Margin="10,10,0,0" Width="417" FontSize="14" BorderBrush="White" Foreground="Black" Height="681" VerticalAlignment="Top">
+        <GroupBox Header="Actions" HorizontalAlignment="Left" Margin="10,10,0,0" Width="417" FontSize="14" BorderBrush="White" Foreground="#FF303AFF" Height="681" VerticalAlignment="Top">
             <Grid>
                 <GroupBox Header="Search title" HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="305" Margin="0,10,0,0">
                     <Grid>
@@ -28,16 +28,16 @@
                 </GroupBox>
                 <GroupBox Header="Edit/Add information about the movie" HorizontalAlignment="Left" Height="535" Margin="0,119,0,0" VerticalAlignment="Top" Width="405">
                     <Grid>
-                        <Label Content="Title: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Title: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
                         <TextBox x:Name="txt_edit_movieTitle" HorizontalAlignment="Left" Height="23" Margin="60,16,0,0" VerticalAlignment="Top" Width="325"/>
-                        <Label Content="Year: " HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Year: " HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
                         <TextBox x:Name="txt_edit_movieYear" HorizontalAlignment="Left" Height="23" Margin="60,44,0,0" VerticalAlignment="Top" Width="325"/>
-                        <Label Content="Plot: " HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Plot: " HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
                         <TextBox x:Name="txt_edit_moviePlot" Height="120" Margin="10,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="375"/>
-                        <Label Content="Review: " HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Review: " HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
                         <TextBox x:Name="txt_edit_movieReview" HorizontalAlignment="Left" Height="211" Margin="10,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375"/>
                         <ComboBox x:Name="combo_score" HorizontalAlignment="Left" Margin="62,471,0,0" VerticalAlignment="Top" Width="120"/>
-                        <Label Content="Score: " HorizontalAlignment="Left" Margin="10,467,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Score: " HorizontalAlignment="Left" Margin="10,467,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
                         <Button x:Name="btn_add_movieReview" Content="Add Review" HorizontalAlignment="Left" Margin="187,473,0,0" VerticalAlignment="Top" Width="85" Click="btn_add_movieReview_Click"/>
                         <Button x:Name="btn_clear_edit" Content="Clear" HorizontalAlignment="Left" Margin="308,473,0,0" VerticalAlignment="Top" Width="75" Click="btn_clear_edit_Click"/>
                     </Grid>
