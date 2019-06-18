@@ -12,15 +12,14 @@
         MinHeight="700" 
         FontSize="14" 
         FontFamily="Segoe UI Semibold" 
-        Foreground="Black" 
-        Background="#FFB0B0B0">
+        Foreground="Black" Background="#FFB0B0B0">
     <Grid>
         <Grid.Effect>
             <DropShadowEffect BlurRadius="9"/>
         </Grid.Effect>
         <GroupBox Header="Actions" HorizontalAlignment="Left" Height="681" Margin="10,10,0,0" VerticalAlignment="Top" Width="417" FontSize="14" BorderBrush="White" Foreground="Black">
             <Grid>
-                <GroupBox Header="Search for title" HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="305" Margin="0,10,0,0">
+                <GroupBox Header="Search title" HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="305" Margin="0,10,0,0">
                     <Grid>
                         <TextBox x:Name="txt_search_movie" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
                         <Button x:Name="btn_search_movie" Content="Search" HorizontalAlignment="Left" Margin="208,10,0,0" VerticalAlignment="Top" Width="75" Click="btn_search_movie_Click"/>
@@ -59,14 +58,23 @@
         </GroupBox>
         <GroupBox Header="Database response" HorizontalAlignment="Left" Height="341" Margin="432,350,0,0" VerticalAlignment="Top" Width="417">
             <Grid>
-                <DataGrid x:Name="dataGridDatabase" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0" Opacity="0.5" Margin="0,0,0,40">
+                <DataGrid x:Name="dataGridDatabase" AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0" Opacity="0.5" Margin="0,0,0,40" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Path=Title}"/>
+                        <DataGridTextColumn Header="Year" Width="*" Binding="{Binding Path=Year}"/>
+                        <DataGridTextColumn Header="Plot" Width="*" Binding="{Binding Path=Plot}"/>
+                        <DataGridTextColumn Header="Review" Width="*" Binding="{Binding Path=Review}"/>
+                        <DataGridTextColumn Header="Score" Width="*" Binding="{Binding Path=Score}"/>
+                    </DataGrid.Columns>
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridRow}">
                             <EventSetter Event="Control.MouseDoubleClick" Handler="DatagridDatabase_DoubleClicked"/>
                         </Style>
                     </DataGrid.Resources>
                 </DataGrid>
-                <Button x:Name="btn_copy_database" Content="Copy to edit" HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Width="Auto" Click="CopyToEdit_Clicked"/>
+                <Button x:Name="btn_copy_database" Content="Copy to edit" HorizontalAlignment="Left" Margin="233,282,0,0" VerticalAlignment="Top" Width="Auto" Click="CopyToEdit_Clicked"/>
+                <Button x:Name="btn_delete_database" Content="Delete" HorizontalAlignment="Left" Margin="320,282,0,0" VerticalAlignment="Top" Width="75" Click="btn_delete_database_Click"/>
+                <Button x:Name="btn_showAll_database" Content="Show all" HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Width="75" Click="btn_showAll_database_Click"/>
             </Grid>
         </GroupBox>
     </Grid>
