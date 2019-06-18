@@ -1,2 +1,6 @@
 # .NET-WPF-Movie-Reviews
-A demonstration on how to create a movie review app for .NET
+A demonstration on how to use APIs and databases in .NET/C#.
+
+Requirements: 
+.NET
+MongoDB
