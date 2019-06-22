@@ -8,7 +8,7 @@ namespace Movie_Reviews
 {
     class Database
     {
-        private IMongoCollection<Movie> colMovieReviews;
+        private readonly IMongoCollection<Movie> colMovieReviews;
 
         public Database()
         {
@@ -24,11 +24,8 @@ namespace Movie_Reviews
         private IMongoDatabase CreateCloudDatabase()
         {
             string connectionString = @"INSERT YOUR OWN CONNECTION STRING HERE";
-            MongoClientSettings settings = MongoClientSettings.FromUrl(
-              new MongoUrl(connectionString)
-            );
-            settings.SslSettings =
-              new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
+            MongoClientSettings settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
+            settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
             var database = new MongoClient(settings).GetDatabase("MovieReviews");
             return database;
         }
@@ -77,7 +74,7 @@ namespace Movie_Reviews
         }
 
         /// <summary>
-        /// Adds a movie to the collection
+        /// Adds/updates a movie to the collection
         /// </summary>
         /// <param name="review">The movie to add</param>
         public void AddMovieReview(Movie review)

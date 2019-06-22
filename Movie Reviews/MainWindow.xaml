@@ -12,39 +12,39 @@
         MinHeight="700" 
         FontSize="14" 
         FontFamily="Segoe UI Semibold" 
-        Foreground="#FF303AFF" Background="#FFCFFBFF">
+        Foreground="White" Background="#FF8D8D8D">
     <Grid>
         <Grid.Effect>
             <DropShadowEffect BlurRadius="9"/>
         </Grid.Effect>
-        <GroupBox Header="Actions" HorizontalAlignment="Left" Margin="10,10,0,0" Width="417" FontSize="14" BorderBrush="White" Foreground="#FF303AFF" Height="681" VerticalAlignment="Top">
+        <GroupBox Header="Actions" HorizontalAlignment="Left" Margin="10,10,0,0" Width="417" FontSize="14" BorderBrush="White" Foreground="White" Height="681" VerticalAlignment="Top">
             <Grid>
                 <GroupBox Header="Search title" HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="305" Margin="0,10,0,0">
                     <Grid>
                         <TextBox x:Name="txt_search_movie" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
-                        <Button x:Name="btn_search_movie" Content="Search" HorizontalAlignment="Left" Margin="208,10,0,0" VerticalAlignment="Top" Width="75" Click="btn_search_movie_Click"/>
+                        <Button x:Name="btn_search_movie" Content="Search" HorizontalAlignment="Left" Margin="208,10,0,0" VerticalAlignment="Top" Width="75" Click="Btn_search_movie_Click"/>
                         <ComboBox x:Name="combo_search_movie" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" Width="Auto"/>
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="Edit/Add information about the movie" HorizontalAlignment="Left" Height="535" Margin="0,119,0,0" VerticalAlignment="Top" Width="405">
                     <Grid>
-                        <Label Content="Title: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
+                        <Label Content="Title: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White"/>
                         <TextBox x:Name="txt_edit_movieTitle" HorizontalAlignment="Left" Height="23" Margin="60,16,0,0" VerticalAlignment="Top" Width="325"/>
-                        <Label Content="Year: " HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
+                        <Label Content="Year: " HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Foreground="White"/>
                         <TextBox x:Name="txt_edit_movieYear" HorizontalAlignment="Left" Height="23" Margin="60,44,0,0" VerticalAlignment="Top" Width="325"/>
-                        <Label Content="Plot: " HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
+                        <Label Content="Plot: " HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Foreground="White"/>
                         <TextBox x:Name="txt_edit_moviePlot" Height="120" Margin="10,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="375"/>
-                        <Label Content="Review: " HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
+                        <Label Content="Review: " HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Foreground="White"/>
                         <TextBox x:Name="txt_edit_movieReview" HorizontalAlignment="Left" Height="211" Margin="10,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375"/>
                         <ComboBox x:Name="combo_score" HorizontalAlignment="Left" Margin="62,471,0,0" VerticalAlignment="Top" Width="120"/>
-                        <Label Content="Score: " HorizontalAlignment="Left" Margin="10,467,0,0" VerticalAlignment="Top" Foreground="#FF303AFF"/>
-                        <Button x:Name="btn_add_movieReview" Content="Add Review" HorizontalAlignment="Left" Margin="187,473,0,0" VerticalAlignment="Top" Width="85" Click="btn_add_movieReview_Click"/>
-                        <Button x:Name="btn_clear_edit" Content="Clear" HorizontalAlignment="Left" Margin="308,473,0,0" VerticalAlignment="Top" Width="75" Click="btn_clear_edit_Click"/>
+                        <Label Content="Score: " HorizontalAlignment="Left" Margin="10,467,0,0" VerticalAlignment="Top" Foreground="White"/>
+                        <Button x:Name="btn_add_movieReview" Content="Add Review" HorizontalAlignment="Left" Margin="187,473,0,0" VerticalAlignment="Top" Width="85" Click="Btn_add_movieReview_Click"/>
+                        <Button x:Name="btn_clear_edit" Content="Clear" HorizontalAlignment="Left" Margin="308,473,0,0" VerticalAlignment="Top" Width="75" Click="Btn_clear_edit_Click"/>
                     </Grid>
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <GroupBox Header="API response" Height="335" Margin="432,10,19,0" VerticalAlignment="Top">
+        <GroupBox Header="API response" Height="335" Margin="432,10,19,0" VerticalAlignment="Top" Foreground="White">
             <Grid>
                 <DataGrid x:Name="dataGridAPI" IsReadOnly="True" ColumnWidth="*" Background="#FFF0F0F0" Opacity="0.5" Margin="0,0,0,40">
                     <DataGrid.Resources>
@@ -73,8 +73,8 @@
                     </DataGrid.Resources>
                 </DataGrid>
                 <Button x:Name="btn_copy_database" Content="Copy to edit" HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Width="Auto" Click="CopyToEdit_Clicked"/>
-                <Button x:Name="btn_delete_database" Content="Delete" HorizontalAlignment="Left" Margin="177,282,0,0" VerticalAlignment="Top" Width="75" Click="btn_delete_database_Click"/>
-                <Button x:Name="btn_showAll_database" Content="Show all" HorizontalAlignment="Left" Margin="97,282,0,0" VerticalAlignment="Top" Width="75" Click="btn_showAll_database_Click"/>
+                <Button x:Name="btn_delete_database" Content="Delete" HorizontalAlignment="Left" Margin="177,282,0,0" VerticalAlignment="Top" Width="75" Click="Btn_delete_database_Click"/>
+                <Button x:Name="btn_showAll_database" Content="Show all" HorizontalAlignment="Left" Margin="97,282,0,0" VerticalAlignment="Top" Width="75" Click="Btn_showAll_database_Click"/>
             </Grid>
         </GroupBox>
     </Grid>

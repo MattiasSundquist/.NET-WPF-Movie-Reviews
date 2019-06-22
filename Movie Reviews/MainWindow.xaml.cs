@@ -11,7 +11,7 @@ namespace Movie_Reviews
     public partial class MainWindow : Window
     {
 
-        private Database database;
+        private readonly Database database;
 
         public MainWindow()
         {
@@ -81,7 +81,7 @@ namespace Movie_Reviews
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_search_movie_Click(object sender, RoutedEventArgs e)
+        private void Btn_search_movie_Click(object sender, RoutedEventArgs e)
         {
             string searchQuery = txt_search_movie.Text;
 
@@ -109,7 +109,7 @@ namespace Movie_Reviews
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_add_movieReview_Click(object sender, RoutedEventArgs e)
+        private void Btn_add_movieReview_Click(object sender, RoutedEventArgs e)
         {
             // Create a new movie object.
             Movie movieToAdd = new Movie(
@@ -160,7 +160,7 @@ namespace Movie_Reviews
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_clear_edit_Click(object sender, RoutedEventArgs e)
+        private void Btn_clear_edit_Click(object sender, RoutedEventArgs e)
         {
             txt_edit_movieTitle.Text = "";
             txt_edit_movieYear.Text = "";
@@ -202,7 +202,7 @@ namespace Movie_Reviews
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_delete_database_Click(object sender, RoutedEventArgs e)
+        private void Btn_delete_database_Click(object sender, RoutedEventArgs e)
         {
             Movie movie = dataGridDatabase.SelectedItem as Movie;
             MessageBoxResult mbr = MessageBox.Show("Are you sure that you want to delete " + movie.Title + " from the database?", "Attention", MessageBoxButton.YesNo);
@@ -216,7 +216,7 @@ namespace Movie_Reviews
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_showAll_database_Click(object sender, RoutedEventArgs e)
+        private void Btn_showAll_database_Click(object sender, RoutedEventArgs e)
         {
             dataGridDatabase.ItemsSource = database.GetAllMovieReview();
         }
